@@ -51,13 +51,14 @@ namespace tech_hub_recreate
 
         private int pcb = 0, embedded = 1, programing = 2;
 
-        //tasks move to data class
+//tasks data
         IList<string> embedded_tasks = new List<string>() { "task_emb1", "task_emb2", "task_emb3", "task_emb4" };
         IList<string> programming_tasks = new List<string>() { "task_prog1", "task_prog2", "task_prog3" };
         IList<string> pcb_tasks = new List<string>() { "task_pcb1"};
 
         public void open_task(int task,string name)
         {
+ //open new window with task
             Window1 next_win = new Window1();
             next_win.Show();
             next_win.task_content_val = "loading...";
