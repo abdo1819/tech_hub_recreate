@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
-using System.Net;
-using System.Net.Mail;
-
-//using EASendMailRT;
-//using System.Threading.Tasks;
+// Add EASendMail namespace
+using EASendMail;
 
 
 namespace tech_hub_recreate
@@ -16,47 +11,109 @@ namespace tech_hub_recreate
     class Class1
     {
 
-        public void email_send()
+        public bool email_send(string name, string field,int num)
         {
-            //Адрес SMTP-сервера
-            String smtpHost = "SMTP.gmail.com";
-            //Порт SMTP-сервера
-            int smtpPort = 587;
-            //Логин
-            String smtpUserName = "abdo14hashem15@gmail.com";
-            //Пароль
-            String smtpUserPass = "ihtpspri";
-
-            //Создание подключения
-            SmtpClient client = new SmtpClient(smtpHost, smtpPort);
-            //client.EnableSsl = true;
-//            client.ConnectType = SmtpConnectType.ConnectSSLAuto;
-            client.Credentials = new NetworkCredential(smtpUserName, smtpUserPass);
-
-            //Адрес для поля "От"
+//add server data
+            String smtpHost = "smtp.mail.ru";
+            int smtpPort = 465;
+            String smtpUserName = "abdo.hashem98@mail.ru";
+            String smtpUserPass = "fkKGjQw6EGRMmfz";
+ //add messege data
             String msgFrom = smtpUserName;
-            //Адрес для поля "Кому" (адрес получателя)
             String msgTo = "ar1813@fayoum.edu.eg";
-            //Тема письма
-            String msgSubject = "Письмо от C#";
-            //Текст письма
-            String msgBody = "Привет!\r\n\r\nЭто тестовое письмо\r\n\r\n--\r\nС уважением, C# :-)";
+            String msgSubject = name ;
+            String msgBody = $"{field} task number {num}";
+ 
+            SmtpMail message = new SmtpMail("TryIt");
+            message.From = msgFrom;
+            message.To = msgTo;
+            message.Subject = msgSubject;
+            message.TextBody = msgBody;
 
-            //Создание сообщения
-            MailMessage message = new MailMessage(msgFrom, msgTo, msgSubject, msgBody);
+ //connect to server
+            SmtpServer oServer = new SmtpServer(smtpHost);
+            oServer.User = msgFrom;
+            oServer.Password = smtpUserPass;
+            oServer.Port = smtpPort;
+            oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+
+            SmtpClient oSmtp = new SmtpClient();
+            try
+            {
+                oSmtp.SendMail(oServer, message);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private int pcb = 0, embedded = 1, programing = 2;
+
+        //tasks move to data class
+        IList<string> embedded_tasks = new List<string>() { "task_emb1", "task_emb2", "task_emb3", "task_emb4" };
+        IList<string> programming_tasks = new List<string>() { "task_prog1", "task_prog2", "task_prog3" };
+        IList<string> pcb_tasks = new List<string>() { "task_pcb1"};
+
+        public void open_task(int task,string name)
+        {
+            Window1 next_win = new Window1();
+            next_win.Show();
+            next_win.task_content_val = "loading...";
+
+
+            Random rnd = new Random();
+            int max_embedded = 4, max_programming = 3, max_pcb = 1;
+            int rnd_num;
+
+         
+
+            Class1 fun = new Class1();
+            if (task == pcb)
+            {
+                rnd_num = rnd.Next(0, max_pcb);
+                if (fun.email_send(name, "pcb", rnd_num))
+                {
+                    next_win.task_content_val = pcb_tasks[rnd_num];
+                }
+                else
+                {
+                    MessageBox.Show("check internet connection if your netowrk work contact me");
+                }
+            }
+            else if (task == embedded)
+            {
+
+                rnd_num = rnd.Next(0, max_embedded);
+                if (fun.email_send(name, "embedded", rnd_num))
+                {
+                    next_win.task_content_val = embedded_tasks[rnd_num];
+                }
+                else
+                {
+                    MessageBox.Show("check internet connection if your netowrk work contact me");
+                }
+
+            }
+            else if (task == programing)
+            {
+
+                rnd_num = rnd.Next(0, max_programming);
+                if (fun.email_send(name, "programming", rnd_num))
+                {
+                    next_win.task_content_val = programming_tasks[rnd_num];
+                }
+                else
+                {
+                    MessageBox.Show("check internet connection if your netowrk work contact me");
+                }
+
+            }
+
+
 
             
-                //Отсылаем сообщение
-                client.Send(message);
-            
-            //catch (SmtpException ex)
-            //{
-            //    Window1 next_win = new Window1();
-          //      next_win.Show();
-              //  next_win.task_content_val = (ex.InnerException.Message.ToString());
-
-                //В случае ошибки при отсылке сообщения можем увидеть, в чем проблема
-        //    }
         }
 
 

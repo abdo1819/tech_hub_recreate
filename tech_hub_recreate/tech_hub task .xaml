@@ -11,7 +11,7 @@
             <ColumnDefinition Width="65*"/>
             <ColumnDefinition Width="727*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer HorizontalAlignment="Left" Margin="0,0,-8,0" Width="800" Height="auto" RenderTransformOrigin="0.492,0.514" Background="#FF959595" Grid.ColumnSpan="2">
+        <ScrollViewer HorizontalAlignment="Left" Margin="0,0,0,0" Width="800" Height="auto" RenderTransformOrigin="0.492,0.514" Background="#FF959595" Grid.ColumnSpan="2">
             <TextBlock Name="task_content" TextWrapping="Wrap" Text="TextBlock" FontSize="16px" Height="auto"
                         Width="auto"/>
 
