@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:tech_hub_recreate"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="703*"/>
+        </Grid.ColumnDefinitions>
+        <RadioButton x:Name="embedded_box" Content="Embedded system" HorizontalAlignment="Left" Margin="25,72,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+        <RadioButton x:Name="programming_box" Content="Programing" HorizontalAlignment="Left" Margin="25,125,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+        <RadioButton x:Name="pcb_box" Content="PCB" HorizontalAlignment="Left" Margin="25,182,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+        <TextBox x:Name="username" HorizontalAlignment="Left" Height="29" Margin="25,230,0,0" TextWrapping="Wrap" Text="write your name  here !" VerticalAlignment="Top" Width="528" FontSize="16" MouseDoubleClick="delete_text" Grid.Column="1"/>
+        <Button Content="Go" HorizontalAlignment="Left" Margin="25,312,0,0" VerticalAlignment="Top" Width="102" Height="38" Click="Button_Click" Grid.Column="1"/>
     </Grid>
 </Window>
